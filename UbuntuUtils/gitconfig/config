@@ -1,0 +1,60 @@
+Host *
+    ForwardAgent yes
+
+Host ee
+    Hostname gitee.com
+    User git
+    Pubkeyauthentication yes
+    Identityfile ~/.ssh/id_rsa
+
+Host hub
+    Hostname github.com
+    User git
+    PubKeyAuthentication yes
+    IdentityFile ~/.ssh/id_rsa
+
+Host lab
+    Hostname gitlab.offerhk.com
+    User git
+    PubKeyAuthentication yes
+    IdentityFile ~/.ssh/id_rsa
+
+Host dev
+    Hostname 39.108.123.165
+    User root
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
+    PubKeyAuthentication yes
+    IdentityFile ~/.ssh/id_rsa
+
+Host prod
+    Hostname 120.79.204.14
+    User root
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
+    PubKeyAuthentication yes
+    IdentityFile ~/.ssh/id_rsa
+
+Host tan
+    Hostname 34.92.150.215
+    User tanduzhi
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
+    PubKeyAuthentication yes
+    IdentityFile ~/.ssh/id_rsa
+
+Host an
+    Hostname 35.229.145.168
+    User andyson1024
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
+    PubKeyAuthentication yes
+    IdentityFile ~/.ssh/id_rsa
+
+Host ista
+    Hostname 122.128.111.16
+    User root
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
+    PubKeyAuthentication yes
+    IdentityFile ~/.ssh/id_rsa
