@@ -1,5 +1,0 @@
-set editing-mode vi
-# set keymap vi
-"\C-l" clear-screen
-"\C-p": previous-history
-"\C-n": next-history

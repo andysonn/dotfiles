@@ -1,0 +1,526 @@
+" Pathogen or Vundle (deafult is Vundle) {{{
+" 插件管理嚣 Pathogen 和 Vundle 默认使用Vundle
+
+" Comment-out if you want to use pahogen
+" Pathogen插件使用配置
+" execute pathogen#infect()
+" com! -nargs=+ Bundle
+
+" ---------------------------------------------------
+" man.vim: invoked by :Man {name}
+" 分屏显示man手册 用法：Man string
+" ---------------------------------------------------
+source $VIMRUNTIME/ftplugin/man.vim
+"设置快捷键得到光标所在位置的man手册并且分屏显示
+nnoremap ,K :Man <C-R>=expand("<cword>")<CR><CR>
+
+" ---------------------------------------------------
+" let Vundle manage Vundle, required
+" vim插件管理嚣
+" ---------------------------------------------------
+Plugin 'gmarik/vundle'
+
+"}}}  Vundle End
+
+"====================================================
+
+" ---------------------------------------------------
+" ex-config:
+" exvim项目 配置文件解析插件
+" ---------------------------------------------------
+"  {
+Plugin 'exvim/ex-config'
+" nnoremap <unique> <leader>ve :call exconfig#edit_cur_vimentry ()<CR>
+"  }
+
+" ---------------------------------------------------
+" ex-utility:
+" ---------------------------------------------------
+"  {
+Plugin 'exvim/ex-utility'
+
+" nnoremap <unique> <silent> <Leader>bd :EXbd<CR>
+" nnoremap <unique> <silent> <C-l> :EXbn<CR>
+" nnoremap <unique> <silent> <C-h> :EXbp<CR>
+" nnoremap <unique> <silent> <C-Tab> :EXbalt<CR>
+" nnoremap <unique> <silent> <Leader><Tab> :EXsw<CR>
+" nmap <unique> <silent> <Leader><Esc> :EXgp<CR><ESC>
+"  }
+
+" ---------------------------------------------------
+" ex-vimentry
+" exvim 创建和设置一个项目
+" ---------------------------------------------------
+Plugin 'exvim/ex-vimentry'
+
+" ---------------------------------------------------
+" ex-project
+" exvim 文件浏览器
+" ---------------------------------------------------
+Plugin 'exvim/ex-project'
+
+nnoremap ,E   :EXProjectToggle<CR>
+
+" ---------------------------------------------------
+" ex-gsearch
+" exvim 全局搜索插件
+" ---------------------------------------------------
+"  {
+Plugin 'exvim/ex-gsearch'
+
+"设置显示搜索结果栏高度
+let g:ex_gsearch_winsize = 10
+"设置space调节结果栏最大高度
+let g:ex_gsearch_winsize_zoom = 20
+"是否显示帮助信息
+let g:ex_gsearch_enable_help = 0
+
+call exgsearch#register_hotkey( 100, 0, '<leader>G', ":EXGSearchToggle<CR>", 'Toggle global search window.' )
+call exgsearch#register_hotkey( 101, 0, '<leader>gg', ":EXGSearchCWord<CR>", 'Search current word.' )
+call exgsearch#register_hotkey( 102, 0, '<leader>gs', ":GS ", 'Shortcut for :GS' )
+"  }
+
+" ---------------------------------------------------
+" ex-tagselect
+" 查找符号 依赖ctags命令
+" exvim 查找符号
+" ---------------------------------------------------
+"  {
+Plugin 'exvim/ex-tags'
+
+"设置显示搜索结果栏高度
+let g:ex_tags_winsize = 10
+"设置space调节结果栏最大高度
+let g:ex_tags_winsize_zoom = 20
+"是否显示帮助信息
+let g:ex_tags_enable_help = 0
+
+call extags#register_hotkey( 100, 0, '<leader>T', ":EXTagsToggle<CR>", 'Toggle tag select window.' )
+call extags#register_hotkey( 101, 0, '<leader>]', ":EXTagsCWord<CR>", 'Tag select current word.' )
+" DISABLE: nnoremap <unique> <leader>] :exec 'ts ' . expand('<cword>')<CR>
+"  }
+
+" ---------------------------------------------------
+" ex-symbol
+" exvim项目整合 查找符号
+" ---------------------------------------------------
+"  {
+Plugin 'exvim/ex-symbol'
+
+call exsymbol#register_hotkey( 100, 0, '<leader>ss', ":EXSymbolList<CR>", 'List all symbols.' )
+call exsymbol#register_hotkey( 101, 0, '<leader>sq', ":EXSymbolOpen<CR>", 'Open symbols window.' )
+call exsymbol#register_hotkey( 102, 0, '<leader>sg', ":EXSymbolCWord<CR>", 'List symbols contains current word.' )
+
+if has('gui_running')
+    if has ('mac')
+        call exsymbol#register_hotkey( 102, 0, 'Ò', ":EXSymbolList<CR>:redraw<CR>/", 'List all symbols and stay in search mode.' )
+    else
+        call exsymbol#register_hotkey( 102, 0, '<M-L>', ":EXSymbolList<CR>:redraw<CR>/", 'List all symbols and stay in search mode.' )
+    endif
+endif
+let g:ex_symbol_select_cmd = 'TS'
+
+"  }
+
+" ---------------------------------------------------
+" ex-cscope
+" 可以生成函数被什么函数调用 调用了哪些函数
+" ---------------------------------------------------
+"  {
+Plugin 'exvim/ex-cscope'
+
+call excscope#register_hotkey( 100, 0, '<leader>cd', ":EXCSToggle<CR>", 'Toggle cscope window.' )
+"  }
+
+" ---------------------------------------------------
+" ex-qfix
+" ---------------------------------------------------
+"  {
+Plugin 'exvim/ex-qfix'
+
+call exqfix#register_hotkey( 100, 0, '<leader>qf', ":EXQFixToggle<CR>", 'Toggle quickfix window.' )
+call exqfix#register_hotkey( 101, 0, '<leader>qq', ":EXQFixPaste<CR>", 'Open quickfix window and paste error list from register *.' )
+"  }
+
+" ---------------------------------------------------
+" ex-hierarchy
+" 导出类的继承图 exvim项目 未测试成功
+" ---------------------------------------------------
+"  {
+Plugin 'exvim/ex-hierarchy'
+
+ " nnoremap <unique> <leader>hv :EXHierarchyCWord<CR>
+"  }
+
+" ---------------------------------------------------
+" DISABLE: use tlist instead
+" " exvim/ex-tagbar: invoke by <F4>
+" 当前文件的标签浏览 taglist的替代品
+" 未测试 默认使用taglist
+" ---------------------------------------------------
+"  {
+Plugin 'exvim/ex-tagbar'
+
+nnoremap <unique> <silent> ,L :TagbarToggle<CR>
+
+let g:tagbar_sort = 0
+let g:tagbar_map_preview = '<CR>'
+if has('gui_running')
+    let g:tagbar_map_close = '<Esc>'
+else
+    let g:tagbar_map_close = '<leader><Esc>'
+endif
+let g:tagbar_map_zoomwin = '<Space>'
+let g:tagbar_zoomwidth = 80
+let g:tagbar_autofocus = 1
+let g:tagbar_iconchars = ['+', '-']
+
+" use command ':TagbarGetTypeConfig lang' change your settings
+let g:tagbar_type_javascript = {
+    \ 'ctagsbin': 'ctags',
+    \ 'kinds' : [
+        \ 'v:global variables:0:0',
+        \ 'c:classes',
+        \ 'p:properties:0:0',
+        \ 'm:methods',
+        \ 'f:functions',
+        \ 'r:object',
+    \ ],
+\ }
+let g:tagbar_type_c = {
+    \ 'kinds' : [
+        \ 'd:macros:0:0',
+        \ 'p:prototypes:0:0',
+        \ 'g:enums',
+        \ 'e:enumerators:0:0',
+        \ 't:typedefs:0:0',
+        \ 's:structs',
+        \ 'u:unions',
+        \ 'm:members:0:0',
+        \ 'v:variables:0:0',
+        \ 'f:functions',
+    \ ],
+\ }
+let g:tagbar_type_cpp = {
+    \ 'kinds' : [
+        \ 'd:macros:0:0',
+        \ 'p:prototypes:0:0',
+        \ 'g:enums',
+        \ 'e:enumerators:0:0',
+        \ 't:typedefs:0:0',
+        \ 'n:namespaces',
+        \ 'c:classes',
+        \ 's:structs',
+        \ 'u:unions',
+        \ 'f:functions',
+        \ 'm:members:0:0',
+        \ 'v:variables:0:0',
+    \ ],
+\ }
+  " }
+
+" ---------------------------------------------------
+" ex-showmarks: invoke by m... or <leader>mm, <leader>ma
+" 显示书签标记
+" ---------------------------------------------------
+"  {
+Plugin 'exvim/ex-showmarks'
+
+" TODO: bootleq/ShowMarks on github is well organized in code, but have lots
+" bugs, consider merge his code and fixes the bugs
+let g:showmarks_enable = 1
+let g:showmarks_include = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+let g:showmarks_ignore_type = 'hqm' " Ignore help, quickfix, non-modifiable buffers
+" Hilight lower & upper marks
+let g:showmarks_hlline_lower = 1
+let g:showmarks_hlline_upper = 0
+"  }
+
+" ---------------------------------------------------
+" ex-matchit: invoke by %
+" 增强%的功能 原有%只能在括号之间跳转 此插件让%可以在if/endif之间跳转等
+" ---------------------------------------------------
+Plugin 'exvim/ex-matchit'
+
+" ---------------------------------------------------
+" ex-colorschemes 配色方案
+" ---------------------------------------------------
+Plugin 'exvim/ex-colorschemes'
+
+" ---------------------------------------------------
+" vim-color-solarized  配色方案
+" ---------------------------------------------------
+Plugin 'altercation/vim-colors-solarized'
+
+" ---------------------------------------------------
+" ctrlp: invoke by <ctrl-p>
+" 扩展ctrl+p 显示最近打开文件列表并且支持快速搜索
+" ---------------------------------------------------
+"  {
+Plugin 'kien/ctrlp.vim'
+
+"设置ctrl+p运行的命令
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = ''
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:10'
+let g:ctrlp_follow_symlinks = 2
+"设置需要过滤的文件
+let g:ctrlp_custom_ignore = {
+    \'dir': '\v[\/]\.(git|hg|svn|rvm)$',
+    \'file': '\v[\/]\.(exe|so|dll|zip|tar|gz|pyc|o)$'
+    \}
+let g:ctrlp_max_files = 0 " Unset cap of 10,000 files so we find everything
+let g:ctrlp_mruf_max = 100
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+"当前缓冲列表选择
+nnoremap <unique> <leader>B :CtrlPBuffer<CR>
+"最近打开文档历史选择
+nnoremap <unique> <leader>F :CtrlPMRUFiles<CR>
+"  }
+
+" ---------------------------------------------------
+" vim-surround: invoke when you select words and press 's'
+" 通过命令快速操作文本中的" ' [ ( {等符号(功能非常强大)
+" ---------------------------------------------------
+"  {
+Plugin 'tpope/vim-surround'
+xmap s <Plug>VSurround
+"  }
+
+" ---------------------------------------------------
+" nerdtree: invoke by :NERDTreeToggle
+" 文件浏览器
+" ---------------------------------------------------
+"  {
+Plugin 'scrooloose/nerdtree'
+
+"让Tree把自己给装饰得多姿多彩些
+"let NERDChristmasTree=1
+"控制光标移动超过一定距离时，是否自动将焦点y调整到屏中心
+"let NERDTreeAutoCenter=1
+"与上面配合使用
+"let NERDTreeAutoCenterThreshold=1
+"排序时是否大小写敏感
+"let NERDTreeCaseSensitiveSort=1
+"是否高亮显示光标所在行
+"let NERDTreeHighlightCursorline=1
+"指写书签文件
+"let NERDTreeBookmarksFile='/root/vim/bookmark.txt'
+"指定鼠标模式：1为双击打开，3为单击打开，2为目录为单击打开，文件双击打开
+let NERDTreeMouseMode=2
+"打开文件后是否关闭NerdTree窗口
+"let NERDTreeQuitOnOpen=1
+"是否默认显示书签列表
+let NERDTreeShowBookmarks=1
+"是否默认显示文件
+let NERDTreeShowFiles=1
+"是否默认显示隐藏文件
+let NERDTreeShowHidden=1
+"是否默认显示行号
+"let NERDTreeShowLineNumbers=1
+"排序规则，这个就麻烦了，可以用正则表达式
+"let NERDTreeSortOrder=
+"窗口状态栏
+"let NERDTreeStatusline=
+"窗口位置（left or right）
+"let NERDTreeWinPos='right'
+"窗口宽
+let NERDTreeWinSize=30
+"文件浏览器放大快捷键设置
+let g:NERDTreeMapToggleZoom = '<Space>'
+
+"映射F7打开关闭NERDTree窗口
+imap <F7> <ESC>:NERDTreeToggle<CR>
+nmap <F7> :NERDTreeToggle<CR>
+
+"winnr()    获取当前窗口窗口ID
+"winbufnr(winnr())   获取当前窗口的缓冲区ID
+"bufname(winbufnr(winnr()))  获取当前窗口缓冲区的名字
+"strpart(bufname(winbufnr(winnr())), 10)   截取从缓冲区名字第10字符开始到结束
+" map <expr> <F7> bufloaded("NERD_tree_".strpart(bufname(winbufnr(winnr())),10))?"q":":NERDTree\<cr>"
+
+"  }
+
+" ---------------------------------------------------
+" nerdcommenter: invoke by <leader>c<space>, <leader>cl,
+"                   <leader>cu, <F11> or <C-F11>
+" 批量注释
+" ---------------------------------------------------
+"  {
+" 我主要用于C/C++代码注释(其它的也行)
+" 以下为插件默认快捷键，其中的说明是以C/C++为例的，其它语言类似
+" <Leader>ci 以每行一个 /* */ 注释选中行(选中区域所在行)，再输入则取消注释
+" <Leader>cc 以每行一个 /* */ 注释选中行或区域，再输入则称重复注释,  单行注释
+" <Leader>cu 取消选中区域(行)的注释，选中区域(行)内至少有一个 /* */  取消注释
+" <Leader>ca 在/*...*/与//这两种注释方式中切换, 单行注释符切换
+" <Leader>cA 行尾注释
+" <Leader>cs 批量注释
+" <Leader>cb 对齐注释符
+" <Leader>cl 对齐注释符
+Plugin 'scrooloose/nerdcommenter'
+
+"在左注释符之后，右注释符之前留有空格
+let g:NERDSpaceDelims = 1
+let g:NERDRemoveExtraSpaces = 1
+let g:NERDCustomDelimiters = {
+            \ 'vimentry': { 'left': '--' },
+            \ 'vue': { 'left': '//' }
+            \ }
+"map <unique> <F11> <Plug>NERDCommenterAlignBoth
+"map <unique> <C-F11> <Plug>NERDCommenterUncomment
+"  }
+
+" ---------------------------------------------------
+" TODO: choose a snippet plugin
+" 代码片段  未测试
+" ---------------------------------------------------
+"  {
+" Plugin 'Shougo/neosnippet.vim'
+" Plugin 'msanders/snipmate.vim'
+"  }
+
+" ---------------------------------------------------
+" undotree: invoke by <Leader>u
+" 撤消管理 在窗口中展示vim撤消记录
+" ---------------------------------------------------
+"  {
+Plugin 'mbbill/undotree'
+
+nnoremap <leader>u :UndotreeToggle<CR>
+let g:undotree_SetFocusWhenToggle=1
+let g:undotree_WindowLayout = 4
+
+" NOTE: this will prevent undotree closed then jump to minibufexpl
+function! g:CloseUndotree()
+    call UndotreeHide()
+    call ex#window#goto_edit_window()
+endfunction
+
+function g:Undotree_CustomMap()
+    if has('gui_running')
+        nnoremap <silent> <script> <buffer> <ESC> :call g:CloseUndotree()<CR>
+    else
+        nnoremap <silent> <script> <buffer> <leader><ESC> :call g:CloseUndotree()<CR>
+    endif
+endfunction
+"  }
+
+" ---------------------------------------------------
+" vim-easymotion: invoke by <leader><leader> w,b,e,ge,f,F,h,i,j,k,/
+" 增强光标移动命令
+" ---------------------------------------------------
+"  {
+" ,,w   当前光标向下按单词头显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+" ,,b   当前光标向上按单词头显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+" ,,e   当前光标向下按单词尾显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+" ,,ge   当前光标向上按单词尾显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+" ,,f   当前光标向后查找字符显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+" ,,F   当前光标向前查找字符显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+" ,,h   当前光标向左按分隔符显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+" ,,l   当前光标向右按分隔符显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+" ,,k   当前光标向上按行显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+" ,,j   当前光标向下按行显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+" ,,/   全文搜索给搜索结果显示跳转字符 输入跳转字符自动跳转到跳转字符显示位置
+"
+Plugin 'Lokaltog/vim-easymotion'
+
+map <leader><leader>/ <Plug>(easymotion-sn)
+omap <leader><leader>/ <Plug>(easymotion-tn)
+map <leader><leader>j <Plug>(easymotion-j)
+map <leader><leader>k <Plug>(easymotion-k)
+map <leader><leader>l <Plug>(easymotion-lineforward)
+map <leader><leader>h <Plug>(easymotion-linebackward)
+let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+"  }
+
+" ---------------------------------------------------
+" vim-better-whitespace  检测有效字符行未空格
+" ---------------------------------------------------
+"  {
+Plugin 'ntpeters/vim-better-whitespace'
+"设置快捷键去除本文本所有行末空格
+nnoremap <unique> ,ws :StripWhitespace<CR>
+
+"  }
+
+" ---------------------------------------------------
+" vim-easy-align  快速对齐
+" ---------------------------------------------------
+"  {
+Plugin 'junegunn/vim-easy-align'
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+"  }
+"====================================================
+
+" ---------------------------------------------------
+" 个人常用设置
+" ---------------------------------------------------
+Plugin 'iprintf/vim-misc'
+
+"====================================================
+" web developer
+
+" ---------------------------------------------------
+" emmet-vim  html辅助编写
+" ---------------------------------------------------
+"  {
+Plugin 'mattn/emmet-vim'
+
+" make sure emmet only enable in html,css files
+ " let g:user_emmet_install_global = 0
+ " autocmd FileType html,css EmmetInstall
+"  }
+
+" ---------------------------------------------------
+" vim-markdown
+" 轻量级标记语言 写作排版语言 语法高亮 缩进
+" ---------------------------------------------------
+"  {
+" Plugin 'plasticboy/vim-markdown'
+
+" let g:vim_markdown_initial_foldlevel=9999
+"  }
+"
+
+" ---------------------------------------------------
+" vim-pug  html模块引擎文件语法高亮及缩进
+" ---------------------------------------------------
+Plugin 'vim-pug'
+
+" ---------------------------------------------------
+" vim-stylus  stylus文件语法高亮及缩进
+" ---------------------------------------------------
+Plugin 'vim-stylus'
+
+" ---------------------------------------------------
+" vim-vue  vue文件语法高亮及缩进
+" ---------------------------------------------------
+Plugin 'vim-vue'
+
+" ---------------------------------------------------
+" 所有语言自动格式化框架
+" 需要安装对应语言的格式化工具
+" javascript: npm install -g js-beautify
+" html: npm install -g html-beautify
+" css: npm install -g css-beautify
+" ---------------------------------------------------
+Plugin 'vim-autoformat'
+"F2自动格式化代码
+nnoremap <F2> :Autoformat<CR><CR>
+vnoremap <F2> :Autoformat<CR><CR>
+
+" ---------------------------------------------------
+" MySQL客户端封装
+" 在vim中执行MySQL命令并且分割窗口显示
+" ---------------------------------------------------
+Plugin 'iprintf/vim-sql'
+let g:kyo_sql_host = '127.0.0.1'
+let g:kyo_sql_user = 'root'
+let g:kyo_sql_pwd = '123321'
+let g:kyo_sql_port = 3306
+let g:kyo_sql_db = 'mysql'

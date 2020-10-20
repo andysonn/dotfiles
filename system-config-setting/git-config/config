@@ -1,0 +1,65 @@
+Host *
+  ForwardAgent yes
+
+Host hub
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa
+  IdentitiesOnly yes
+
+Host ee
+  HostName gitee.com
+  User git
+  IdentityFile ~/.ssh/id_rsa
+  IdentitiesOnly yes
+
+Host lab
+  HostName gitlab.offerhk.com
+  User git
+  IdentityFile ~/.ssh/id_rsa
+  IdentitiesOnly yes
+
+# dev(lxbird & hkok)
+Host dev
+  HostName 39.108.123.165
+  User root
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+  PubKeyAuthentication yes
+  IdentityFile ~/.ssh/id_rsa
+
+# prod(lxbird)
+Host prod
+  HostName 120.79.204.14
+  User root
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+  PubKeyAuthentication yes
+  IdentityFile ~/.ssh/id_rsa
+
+# prod(ista)
+Host ista
+  Hostname 122.128.111.16
+  User root
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+  PubKeyAuthentication yes
+  IdentityFile ~/.ssh/id_rsa
+
+# google cloud
+Host tan
+  Hostname 34.92.150.215
+  User tanduzhi
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+  PubKeyAuthentication yes
+  IdentityFile ~/.ssh/id_rsa
+
+# google cloud
+Host an
+  HostName 35.229.145.168
+  User andyson1024
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+  PubKeyAuthentication yes
+  IdentityFile ~/.ssh/id_rsa

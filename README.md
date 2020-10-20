@@ -1,11 +1,11 @@
-# AnNotes
-> 渣渣笔记
+# iNotes
+> 🙈 
 
 ## 目录结构的说明
 ```
-├── Font                        // 字体收录
-├── PDF                         // PDF
-├── UbuntuUtils                 // Ubuntu 装机
+├── font
+├── pdf
+├── system-config-setting
 └── README.md
 ```
 
