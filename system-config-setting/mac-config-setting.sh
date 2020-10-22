@@ -4,6 +4,11 @@ set_git() {
   cp ./git-config/.gitconfig ~/.gitconfig
   cp ./git-config/config ~/.ssh/config
   cp ./git-config/id_rsa.pub ~/.ssh/id_rsa.pub
+  # 启动 ssh agent
+  eval "$(ssh-agent -s)"
+  # 将 SSH 私钥添加到 ssh-agent 并将密码短语(passphrase)存储在密钥链中
+  # -K macOS 的密钥链
+  ssh-add -K ~/.ssh/id_rsa
 }
 
 set_vim() {
