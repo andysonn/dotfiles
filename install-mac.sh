@@ -90,7 +90,7 @@ install_iprintf_vim() {
   rm -rf ~/.vim* &> /dev/null
 
   git clone https://gitee.com/iprintf/vim ~/.iprintf-vim
-  echo -e "set clipboard=unamed" >> ~/.iprintf-vim/config/.vimrc
+  echo -e "\nset clipboard=unnamed" >> ~/.iprintf-vim/config/.vimrc
 
   FROM_FILES=~/.iprintf-vim/config/.vim*
   TARGET_DIR=~
