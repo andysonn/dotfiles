@@ -60,5 +60,5 @@ alias build:v2='cd ~/Work/hkokV2; npm run build; rsync -azvP ./dist/v2/ ~/Work/h
 # Other
 set -o vi
 set backspace=2
-alias backup-brew='brew bundle dump --describe --force --file="$HOME/Documents/BrewDoc/Brewfile"'
+alias backup-brew='brew bundle dump --describe --force --file="$HOME/Documents/iProfile/config/brew/Brewfile"'
 ################################################################################
