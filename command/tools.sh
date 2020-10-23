@@ -3,7 +3,7 @@
 function symlink_files() {
   for FILE in $1
   do
-    if [ -f "$FILE" ]; then
+    if [ -f "$FILE" -o -d "$FILE" ]; then
       echo "Processing $FILE file"
       FILE_NAME=$(basename -- "$FILE")
 
