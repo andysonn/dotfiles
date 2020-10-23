@@ -3,7 +3,7 @@
 cfg_dir=$(pwd)
 
 apt_source_update () {
-  sudo cp ./ubuntu-sources.list /etc/apt/sources.list
+  sudo cp ./config/ubuntu/sources.list /etc/apt/sources.list
   sudo apt update
 }
 

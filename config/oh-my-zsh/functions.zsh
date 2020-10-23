@@ -34,9 +34,7 @@ function compress-video() {
 }
 
 
-#
 # watchman test.txt 1 echo 'Tada!'
-#
 function watchman {
   initial_time=$(stat -f '%Z' $1)
   while true; do
@@ -49,9 +47,7 @@ function watchman {
   done
 }
 
-#
 # Find a port blocker
-#
 function find-port-blocker() {
   if ! [ $# -eq 1 ]; then
     echo "Please define the port you want to check \n $ find-port-blocker 8000"
@@ -61,7 +57,7 @@ function find-port-blocker() {
   lsof -i tcp:$1
 }
 
-# Change MAC adress to get around public wifi limitations
+# Change MAC address to get around public wifi limitations
 function hack-the-space() {
   NEW_MAC_ADDRESS=$(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//')
   echo $NEW_MAC_ADDRESS
@@ -90,7 +86,7 @@ function mv() {
   command mv -v -- "$1" "$newfilename"
 }
 
-# create files in subfolders
+# create files in sub folders
 function touchp() {
   mkdir -p "$(dirname "$1")/" && touch "$1"
 }
