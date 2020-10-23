@@ -1,24 +1,28 @@
-# iNotes
-> 🙈 
+<p align="center">
+  <a href="https://hkok.offerhk.com">
+    <img width="370" src="https://s1.ax1x.com/2020/10/23/BAMpk9.png"/>
+  </a>
+</p>
 
-## 目录结构的说明
+<h1 align="center">iProfile</h1>
+
+<div align="center">
+  <img width="100" src="https://s1.ax1x.com/2020/10/23/BAMDXT.png"/>
+</div>
+
+## 📦 Usage
 ```
-├── font
-├── pdf
-├── system-config-setting
+# install all config
+./iProfile/install-mac.sh all
+
+# install home config
+./iProfile/install-mac.sh home
+```
+
+## dir tree
+```
+├── command
+├── config
+├── install-mac.sh
 └── README.md
 ```
-
-### Commit Message 约定
-* 🎨 优化代码（日常调整）
-* 🐛 修复BUG
-* ♻️ 重构（大调整）
-* 💄 更新UI和样式文件
-* 📝 写文档
-* ✨ 新增功能
-* ➕ 添加依赖项
-* 🔖 发布/版本标签
-* 🍱 添加或者更新某些资源文件
-* 🔩 公共组件及工具函数
-* 🔨 打包相关
-* 🔧 调整配置
