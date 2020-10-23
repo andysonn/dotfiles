@@ -11,14 +11,23 @@ source "$ROOT_DIR/command/tools.sh"
 # ssh config
 install_ssh_config() {
   log_section_start "Installing ssh config"
-  # 启动 ssh agent
-  eval "$(ssh-agent -s)"
-  # 将 SSH 私钥添加到 ssh-agent 并将密码短语(passphrase)存储在密钥链中
-  # -K macOS 的密钥链
-  ssh-add -K ~/.ssh/id_rsa
 
-  FROM_FILES="$CONFIG_DIR/ssh/.*"
+  if [ -f ~/.ssh/id_rsa ]; then
+    # 启动 ssh agent
+    eval "$(ssh-agent -s)"
+    # 将 SSH 私钥添加到 ssh-agent 并将密码短语(passphrase)存储在密钥链中
+    # -K macOS 的密钥链
+    ssh-add -K ~/.ssh/id_rsa
+  else
+    echo "~/.ssh/id_rsa file no exists"
+  fi
+
+  FROM_FILES="$CONFIG_DIR/ssh/*"
   TARGET_DIR=~/.ssh/
+
+  if [ ! -d $TARGET_DIR ]; then
+    mkdir $TARGET_DIR &> /dev/null
+  fi
 
   log_section_start "Sym linking files from $FROM_FILES to $TARGET_DIR"
   symlink_files "$FROM_FILES" "$TARGET_DIR"
@@ -84,7 +93,7 @@ install_iprintf_vim() {
   echo -e "set clipboard=unamed" >> ~/.iprintf-vim/config/.vimrc
 
   FROM_FILES=~/.iprintf-vim/config/.vim*
-  TARGET_DIR=~/
+  TARGET_DIR=~
   log_section_start "Sym linking files from $FROM_FILES to $TARGET_DIR"
   symlink_files "$FROM_FILES" "$TARGET_DIR"
 }
@@ -99,6 +108,22 @@ install_brew() {
   bash "$SCRIPT_DIR/brew.sh" "$ROOT_DIR"
 }
 
+install_karabiner() {
+  log_section_start "Installing karabiner config"
+
+  FROM_FILE="$CONFIG_DIR/karabiner/karabiner.json"
+  TARGET_FILE=~/.config/karabiner/karabiner.json
+
+  if [ -f $TARGET_FILE ]; then
+    echo "Cleaning up & Backup $TARGET_FILE"
+    tar -cf ~/.config/karabiner/karabiner_$(date +%m%d%H%M%S).tar $TARGET_FILE &> /dev/null
+    rm -rf $TARGET_FILE &> /dev/null
+  fi
+
+  log_section_start "Sym linking from $FROM_FILE to $TARGET_FILE"
+  symlink "$FROM_FILE" "$TARGET_FILE"
+}
+
 install_all() {
   install_ssh_config
   install_home_config
@@ -107,6 +132,7 @@ install_all() {
   install_iprintf_vim
   install_mac
   install_brew
+  install_karabiner
 }
 
 if [ "$(type -t "install_$1")" == function ]; then

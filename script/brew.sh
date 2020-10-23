@@ -1,8 +1,9 @@
 #!/usr/bin/env sh
 
-echo "#############################"
+echo ""
+echo "#######################################"
 echo "# Installing various programs from brew"
-echo "#############################"
+echo "#######################################"
 echo ""
 
 brew -v >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"

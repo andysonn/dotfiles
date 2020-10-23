@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
 echo ""
-echo "#############################"
+echo "########################################"
 echo "# Setting global mac configs from mac.sh"
-echo "#############################"
+echo "########################################"
 echo ""
 
 # echo "Finder: show all filename extensions"
