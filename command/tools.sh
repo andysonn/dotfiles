@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function symlink-files() {
+function symlink_files() {
   for FILE in $1
   do
     if [ -f "$FILE" ]; then
@@ -23,14 +23,14 @@ function symlink() {
   ln -s "$1" "$2";
 }
 
-log-section-start() {
+log_section_start() {
   echo ""
   echo ""
   echo "-> $1"
   echo ""
 }
 
-function brew-install-or-upgrade {
+function brew_install_or_upgrade {
   if brew ls --versions "$1" >/dev/null; then
     HOMEBREW_NO_AUTO_UPDATE=1 brew upgrade "$1"
   else
