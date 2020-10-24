@@ -45,9 +45,15 @@ install_home_config() {
 }
 
 # iTerm2 shell
-install_iterm2_menubar() {
+install_iterm2() {
   log_section_start "Installing iTerm2 shell integration for fancy menubar"
   curl -L https://iterm2.com/shell_integration/zsh -o ~/.iterm2_shell_integration.zsh
+
+  FROM_FILE="$CONFIG_DIR/iterm2/iProfiles.json"
+  TARGET_FILE=~/Library/Application\ Support/iTerm2/DynamicProfiles/iProfiles.json
+
+  log_section_start "Sym linking from $FROM_FILE to $TARGET_FILE"
+  symlink "$FROM_FILE" "$TARGET_FILE"
 }
 
 # oh-my-zsh
@@ -127,7 +133,7 @@ install_karabiner() {
 install_all() {
   install_ssh_config
   install_home_config
-  install_iterm2_menubar
+  install_iterm2
   install_oh_my_zsh
   install_iprintf_vim
   install_mac

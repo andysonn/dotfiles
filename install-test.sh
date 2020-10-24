@@ -11,6 +11,12 @@ source "$ROOT_DIR/command/tools.sh"
 # oh-my-zsh
 install_test() {
   log_section_start "Installing test"
+
+  FROM_FILE="$CONFIG_DIR/iterm2/iProfiles.json"
+  TARGET_FILE=~/Library/Application\ Support/iTerm2/DynamicProfiles/iProfiles.json
+
+  log_section_start "Sym linking from $FROM_FILE to $TARGET_FILE"
+  symlink "$FROM_FILE" "$TARGET_FILE"
 }
 
 
