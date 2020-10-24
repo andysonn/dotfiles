@@ -11,11 +11,11 @@
 ## ✅ usage
 
 ```
+# clone to iCloud Documents
+git https://github.com/andysonn/iProfile.git ~/Documents/iProfile
+
 # install all config
 ./install-mac.sh all
-
-# install home config
-./install-mac.sh home
 ```
 
 ## 📂 dir tree

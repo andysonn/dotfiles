@@ -33,7 +33,6 @@ function compress-video() {
   ffmpeg -i $2.mp4 -strict -2 $2.webm
 }
 
-
 # watchman test.txt 1 echo 'Tada!'
 function watchman {
   initial_time=$(stat -f '%Z' $1)

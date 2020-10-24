@@ -11,7 +11,6 @@ alias cat='bat'
 # public ip address
 alias ip="echo Your ip is; dig +short myip.opendns.com @resolver1.opendns.com;"
 
-
 # set up https-server
 # https://paulbrowne.xyz/https-localhost
 alias https-server='http-server --ssl --cert ~/.ssl/localhost.crt --key ~/.ssl/localhost.key -a localhost -o'
