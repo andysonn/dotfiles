@@ -80,6 +80,9 @@ install_oh_my_zsh() {
   echo "Installing zsh-syntax-highlighting"
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+  mkdir -p "$HOME/.zsh"
+  git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+
   # config
   FROM_FILES="$CONFIG_DIR/oh-my-zsh/*"
   TARGET_DIR=~/.oh-my-zsh/custom/
@@ -92,7 +95,7 @@ install_iprintf_vim() {
   log_section_start "Installing iprintf vim"
 
   test -e ~/.vim -o -e ~/.vimrc -o -e ~/.vimrc.local -o -e ~/.vim.plugins \
-    && tar -cf ~/vim_backup_$(date +%m%d%H%M%S).tar ~/.vim* &> /dev/null
+    && tar -cf ~/vim-backup-$(date +%m%d%H%M%S).tar ~/.vim* &> /dev/null
   rm -rf ~/.vim* &> /dev/null
 
   git clone https://gitee.com/iprintf/vim ~/.iprintf-vim
