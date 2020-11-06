@@ -49,10 +49,10 @@ prompt pure
 
 ################################################################################
 # hkokApp
-alias build:app='cd ~/Work/hkokApp; npm run build; rsync -azvP ./dist/hkok_app/ ~/Work/hkok/public/hkok_app/; rsync -azvP ./dist/resources/views/home/ ~/Work/hkok/resources/views/home/; cd -;'
+alias build-app='cd ~/Work/hkokApp; npm run build; rsync -azvP ./dist/hkok_app/ ~/Work/hkok/public/hkok_app/; rsync -azvP ./dist/resources/views/home/ ~/Work/hkok/resources/views/home/; cd -;'
 
 # hkokV2
-alias build:v2='cd ~/Work/hkokV2; npm run build; rsync -azvP ./dist/v2/ ~/Work/hkok/public/v2/; rsync -azvP ./dist/resources/views/v2/ ~/Work/hkok/resources/views/v2/; cd -;'
+alias build-v2='cd ~/Work/hkokV2; npm run build; rsync -azvP ./dist/v2/ ~/Work/hkok/public/v2/; rsync -azvP ./dist/resources/views/v2/ ~/Work/hkok/resources/views/v2/; cd -;'
 ################################################################################
 
 

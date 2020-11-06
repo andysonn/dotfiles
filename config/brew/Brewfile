@@ -5,7 +5,7 @@ tap "homebrew/core"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Interpreted, interactive, object-oriented programming language
-brew "python@3.8"
+brew "python@3.8", link: true
 # Dependency Manager for PHP
 brew "composer"
 # Modern replacement for 'ls'
@@ -35,14 +35,17 @@ brew "zsh"
 cask "1password"
 cask "alfred3"
 cask "android-studio"
+cask "bob"
 cask "charles"
 cask "daisydisk"
 cask "dash"
 cask "deepl"
 cask "docker"
+cask "dropbox"
 cask "fork"
 cask "forklift"
 cask "go2shell"
+cask "google-backup-and-sync"
 cask "google-chrome"
 cask "hiddenbar"
 cask "hyperswitch"
@@ -54,20 +57,24 @@ cask "kitematic"
 cask "manico"
 cask "neteasemusic"
 cask "notion"
+cask "one-switch"
 cask "paw"
 cask "pdf-expert"
 cask "sequel-pro"
 cask "spectacle"
 cask "surge"
 cask "telegram"
+cask "upic"
 cask "visual-studio-code"
 cask "vmware-fusion"
 cask "webstorm"
+cask "wechat"
+cask "wechatwebdevtools"
 cask "wormhole"
-mas "Amphetamine", id: 937984704
+mas "Dato", id: 1470584107
 mas "Helium", id: 1054607607
 mas "Manico", id: 724472954
 mas "Microsoft Remote Desktop", id: 1295203466
-mas "Reeder", id: 1449412482
+mas "Reeder", id: 1529448980
+mas "Todoist", id: 585829637
 mas "Xcode", id: 497799835
-mas "微信", id: 836500024
