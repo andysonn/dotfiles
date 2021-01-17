@@ -1,9 +1,9 @@
 [user]
   email = andyson1024@gmail.com
-  name = andyson
+  name = Junan
 [core]
   editor = vim
-	ignorecase = false
+  ignorecase = false
 [alias]
   la = log --oneline --decorate --all --graph
   lo = log --oneline --decorate --graph
