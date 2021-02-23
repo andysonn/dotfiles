@@ -15,4 +15,6 @@ chsh -s /bin/zsh
 
 brew install mas
 
-brew bundle --file="$ROOT_DIR/config/brew/Brewfile"
+if [ -f ~/Dropbox/Mackup/.backupfile/Brewfile ]; then
+  brew bundle --file="~/Dropbox/Mackup/.backupfile/Brewfile"
+fi

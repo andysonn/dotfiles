@@ -22,38 +22,18 @@ install_ssh_config() {
     echo "~/.ssh/id_rsa file no exists"
   fi
 
-  FROM_FILES="$CONFIG_DIR/ssh/*"
   TARGET_DIR=~/.ssh/
 
   if [ ! -d $TARGET_DIR ]; then
     mkdir $TARGET_DIR &> /dev/null
   fi
-
-  log_section_start "Sym linking files from $FROM_FILES to $TARGET_DIR"
-  symlink_files "$FROM_FILES" "$TARGET_DIR"
-}
-
-# home config files
-install_home_config() {
-  log_section_start "Installing home config"
-
-  FROM_FILES="$CONFIG_DIR/home/.*"
-  TARGET_DIR=~
-
-  log_section_start "Sym linking files from $FROM_FILES to $TARGET_DIR"
-  symlink_files "$FROM_FILES" "$TARGET_DIR"
 }
 
 # iTerm2 shell
 install_iterm2() {
-  log_section_start "Installing iTerm2 shell integration for fancy menubar"
+  log_section_start "Installing iTerm2"
+
   curl -L https://iterm2.com/shell_integration/zsh -o ~/.iterm2_shell_integration.zsh
-
-  FROM_FILE="$CONFIG_DIR/iterm2/iProfiles.json"
-  TARGET_FILE=~/Library/Application\ Support/iTerm2/DynamicProfiles/iProfiles.json
-
-  log_section_start "Sym linking from $FROM_FILE to $TARGET_FILE"
-  symlink "$FROM_FILE" "$TARGET_FILE"
 }
 
 # oh-my-zsh
@@ -86,8 +66,16 @@ install_oh_my_zsh() {
   # config
   FROM_FILES="$CONFIG_DIR/oh-my-zsh/*"
   TARGET_DIR=~/.oh-my-zsh/custom/
+
   log_section_start "Sym linking files from $FROM_FILES to $TARGET_DIR"
   symlink_files "$FROM_FILES" "$TARGET_DIR"
+}
+
+# oh-my-zsh
+install_oh_my_wechat() {
+  log_section_start "Installing oh-my-wechat"
+
+  curl -o- -L https://omw.limingkai.cn/install.sh | bash -s
 }
 
 # iprintf-vim
@@ -117,31 +105,25 @@ install_brew() {
   bash "$SCRIPT_DIR/brew.sh" "$ROOT_DIR"
 }
 
-install_karabiner() {
-  log_section_start "Installing karabiner config"
+install_mackup() {
+  log_section_start "Installing mackup config"
 
-  FROM_FILE="$CONFIG_DIR/karabiner/karabiner.json"
-  TARGET_FILE=~/.config/karabiner/karabiner.json
-
-  if [ -f $TARGET_FILE ]; then
-    echo "Cleaning up & Backup $TARGET_FILE"
-    tar -cf ~/.config/karabiner/karabiner_$(date +%m%d%H%M%S).tar $TARGET_FILE &> /dev/null
-    rm -rf $TARGET_FILE &> /dev/null
+  if command -v mackup >/dev/null 2>&1; then
+    mackup backup
+  else
+    echo "no exists mackup"
   fi
-
-  log_section_start "Sym linking from $FROM_FILE to $TARGET_FILE"
-  symlink "$FROM_FILE" "$TARGET_FILE"
 }
 
 install_all() {
   install_ssh_config
-  install_home_config
   install_iterm2
   install_oh_my_zsh
+  install_oh_my_wechat
   install_iprintf_vim
   install_mac
   install_brew
-  install_karabiner
+  install_mackup
 }
 
 if [ "$(type -t "install_$1")" == function ]; then
